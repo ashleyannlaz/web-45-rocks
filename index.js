@@ -1,33 +1,28 @@
-require('dotenv').config() // this allows to stash artificial env variables in a file
+// this allows to stash "artificial env variables" in a file
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
 const cors = require('cors')
-const server = express()
 
 console.log(process.env.LADY)
+console.log(process.env.API_SECRET)
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000 // fallback is nice
+
+const server = express()
 
 server.use(express.json())
 server.use(cors())
-// supply something that will work correctly regardless
-// of environment
 server.use(express.static(path.join(__dirname, 'client/build')))
 
-server.get('/', (req, res) => {
-    res.send(`<h1>Web 45 Rocks</h1>`)
-})
-
-server.get('/api', (req, res)=> {
-    res.json({message: 'Web 45 is awesome!'})
+server.get('/api', (req, res) => {
+  res.json({ message: 'Web 45 is awesome!' })
 })
 
 server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
-    // send the build folder from the client
-    // all of this constructs a path to index.html in build
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
 })
 
-server.listen(PORT,()=> {
-    console.log(`listening on port ${PORT}`)
+server.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`)
 })
