@@ -22,7 +22,7 @@ server.get('/api', (req, res)=> {
     res.json({message: 'Web 45 is awesome!'})
 })
 
-server.get('*', (req,res) => {
+server.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
     // send the build folder from the client
     // all of this constructs a path to index.html in build
