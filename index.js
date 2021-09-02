@@ -1,6 +1,9 @@
+require('dotenv').config() // this allows to stash artificial env variables in a file
 const express = require('express')
 const cors = require('cors')
 const server = express()
+
+console.log(process.env.LADY)
 
 const PORT = process.env.PORT || 5000
 
@@ -16,5 +19,5 @@ server.get('/api', (req, res)=> {
 })
 
 server.listen(PORT,()=> {
-    console.log('listening on port 5000')
+    console.log(`listening on port ${PORT}`)
 })
